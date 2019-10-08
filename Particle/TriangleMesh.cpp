@@ -8,7 +8,7 @@ using namespace std;
 
 TriangleMesh::TriangleMesh()
 {
-
+	is_particle = false;
 }
 
 void TriangleMesh::addVertex(const glm::vec3 &position)

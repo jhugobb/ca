@@ -37,7 +37,7 @@ link_directories(${GLEW_LIBRARY_DIRS})
 link_directories(${SOIL_LIBRARY_DIRS})
 link_directories(${FREETYPE_LIBRARY_DIRS})
 
-add_executable(${appName} Text.h Text.cpp TexturedQuad.h TexturedQuad.cpp Texture.h Texture.cpp TriangleMesh.h TriangleMesh.cpp Camera.h Camera.cpp Scene.h Scene.cpp Shader.h Shader.cpp ShaderProgram.h ShaderProgram.cpp Application.h Application.cpp Particle.cpp Particle.h Geometry.cpp Geometry.h main.cpp)
+add_executable(${appName} Text.h Text.cpp TexturedQuad.h TexturedQuad.cpp Texture.h Texture.cpp TriangleMesh.h TriangleMesh.cpp Camera.h Camera.cpp Scene.h Scene.cpp Shader.h Shader.cpp ShaderProgram.h ShaderProgram.cpp Application.h Application.cpp Particle.cpp Particle.h Geometry.cpp Geometry.h PLYReader.cpp PLYReader.h main.cpp)
 
 target_link_libraries(${appName} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${GLEW_LIBRARIES} ${SOIL_LIBRARIES} ${FREETYPE_LIBRARIES})
 

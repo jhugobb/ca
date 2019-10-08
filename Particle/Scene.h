@@ -12,6 +12,7 @@
 #include <map>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <unordered_set>
 
 // Scene contains all the entities of our game.
@@ -30,7 +31,8 @@ public:
 	void render();
 	void setDelta(double);
 	void cleanup();
-	void toggleVisMode();
+	void toggleParticleMode();
+	void toggleUpdateMode();
 
   Camera &getCamera();
   
@@ -41,17 +43,27 @@ private:
 	void computeModelViewMatrix();
 	bool parse(std::string);
 	bool parseVisibility(std::string);
+	void init_particle(Particle* p, float dt);
 
 private:
   Camera camera;
 	std::vector<Particle*> particles;
 	std::vector<Plane*> planes;
+	std::vector<Triangle*> triangles;
+	std::vector<Sphere*> spheres;
+	std::vector<std::vector<float>> curr_tri_dist;
+	std::vector<std::vector<float>> prev_tri_dist; 
 	std::vector<std::vector<float>> curr_plane_dist;
 	std::vector<std::vector<float>> prev_plane_dist; 
+	std::vector<std::vector<bool>> curr_sphere_dist;
+	std::vector<std::vector<bool>> prev_sphere_dist; 
 	std::vector<glm::vec4> colors;
-	bool vis_mode;
+	int part_mode;
+	int update_mode;
 	TriangleMesh* particle_mesh;
 	TriangleMesh* cave;
+	std::vector<TriangleMesh*> tri_meshes;
+	TriangleMesh* sphere_mesh;
 	double delta;
 	float framerate;
 	ShaderProgram basicProgram;

@@ -47,10 +47,17 @@ void Application::resize(int width, int height)
 
 void Application::keyPressed(int key)
 {
-	if(key == 27) // Escape code
-		bPlay = false;
-	if(key == 118)
-		scene.toggleVisMode();
+	switch (key) {
+		case 27:
+			bPlay = false;
+			break;
+		case 109:
+			scene.toggleParticleMode();
+			break;
+		case 117:
+			scene.toggleUpdateMode();
+			break;
+	}
 	keys[key] = true;
 }
 

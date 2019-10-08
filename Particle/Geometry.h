@@ -2,6 +2,7 @@
 #define _GEOMETRY_H
 
 #include <glm/glm.hpp>
+#include <vector>
 
 struct Geometry{
 	virtual void setPosition(const glm::vec3& newPos) = 0;
@@ -24,21 +25,22 @@ struct Plane : public Geometry {
 };	
 
 struct Triangle : public Plane {
-	//glm::vec3 vertex1, vertex2, vertex3;
-	//Triangle(const glm::vec3& point0, const glm::vec3& point1, const glm::vec3& point2);
-	//~Triangle() {};
-	//void setPosition(const glm::vec3& newPos);
-	//bool isInside(const glm::vec3& point);
-	//bool intersecSegment(const glm::vec3& point1, const glm::vec3& point2, glm::vec3& pTall);
+	glm::vec3 vertex1, vertex2, vertex3;
+	Triangle(const glm::vec3& point0, const glm::vec3& point1, const glm::vec3& point2);
+	~Triangle() {};
+	// void setPosition(const glm::vec3& newPos);
+	bool isInside(const glm::vec3& point);
+	// bool intersecSegment(const glm::vec3& point1, const glm::vec3& point2, glm::vec3& pTall);
 };
 
 struct Sphere : public Geometry {
-	//glm::vec3 center;
-	//float radi;
-	//Sphere(const glm::vec3& point, const float& radious);
-	//~Sphere() {};
-	//void setPosition(const glm::vec3& newPos);
-	//bool isInside(const glm::vec3& point);
+	glm::vec3 center;
+	float radius;
+	Sphere(const glm::vec3& point, const float& radius);
+	~Sphere() {};
+	void setPosition(const glm::vec3& newPos);
+	bool isInside(const glm::vec3& point);
+  glm::vec3 getPointOnBoundary(const glm::vec3& p_a, const glm::vec3& p_n);
 	//bool intersecSegment(const glm::vec3& point1, const glm::vec3& point2, glm::vec3& pTall);
 };
 
