@@ -6,7 +6,6 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "ShaderProgram.h"
-#include "LOD.h"
 using namespace std;
 
 // Class TriangleMesh renders a very simple room with textures

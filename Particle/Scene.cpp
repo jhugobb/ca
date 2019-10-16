@@ -7,7 +7,6 @@
 
 #include "Scene.h"
 #include "PLYReader.h"
-#include "LOD.h"
 
 #define GLM_FORCE_RADIANS
 
@@ -193,23 +192,31 @@ bool Scene::loadMesh(const char *filename)
 	return false;
 }
 
-void update_particle_plane(Particle* p, Plane* plane) {
+void update_particle_plane(Particle* p, Plane* plane, int update_mode) {
 	glm::vec3 new_pos = p->getCurrentPosition() - ((1.0f + p->getBouncing()) * (glm::dot(plane->normal, p->getCurrentPosition()) + plane->dconst) * plane->normal);
 	glm::vec3 normal_vel = glm::dot(plane->normal, p->getVelocity()) * plane->normal;
 	glm::vec3 tangent_vel = p->getVelocity() - normal_vel;
 	glm::vec3 new_vel = p->getVelocity() - (( (1.0f+p->getBouncing()) * glm::dot(plane->normal, p->getVelocity())) * plane->normal);
 	new_vel = new_vel - 0.1f * tangent_vel;
+	if (update_mode == 2) {
+		glm::vec3 corrected = p->getPreviousPosition() - 2.0f * (glm::dot(plane->normal, p->getPreviousPosition()) + plane->dconst) * plane->normal;
+		p->setPreviousPosition(corrected);
+	}
 	p->setPosition(new_pos);
 	p->setVelocity(new_vel);
 }
 
-void update_particle_sphere(Particle* p, glm::vec3 normal, glm::vec3 point) {
+void update_particle_sphere(Particle* p, glm::vec3 normal, glm::vec3 point, int update_mode) {
 	Plane* plane = new Plane(point, normal);
 	glm::vec3 new_pos = p->getCurrentPosition() - ((1.0f + p->getBouncing()) * (glm::dot(plane->normal, p->getCurrentPosition()) + plane->dconst) * plane->normal);
 	glm::vec3 normal_vel = glm::dot(plane->normal, p->getVelocity()) * plane->normal;
 	glm::vec3 tangent_vel = p->getVelocity() - normal_vel;
 	glm::vec3 new_vel = p->getVelocity() - (( (1.0f+p->getBouncing()) * glm::dot(plane->normal, p->getVelocity())) * plane->normal);
 	new_vel = new_vel - 0.1f * tangent_vel;
+	if (update_mode == 2) {
+		glm::vec3 corrected = p->getPreviousPosition() - 2.0f * (glm::dot(plane->normal, p->getPreviousPosition()) + plane->dconst) * plane->normal;
+		p->setPreviousPosition(corrected);
+	}
 	p->setPosition(new_pos);
 	p->setVelocity(new_vel);
 	free(plane);
@@ -241,7 +248,7 @@ void Scene::update(int deltaTime, bool forward, bool back, bool left, bool right
 			prev_plane_dist[i][j] = curr_plane_dist[i][j];
 			curr_plane_dist[i][j] = plane->distPoint2Plane(p->getCurrentPosition());
 			if (prev_plane_dist[i][j]*curr_plane_dist[i][j] < 0.0f) { 
-				update_particle_plane(p, plane);
+				update_particle_plane(p, plane, update_mode);
 				curr_plane_dist[i][j] = -curr_plane_dist[i][j];
 			}
 		}
@@ -252,7 +259,7 @@ void Scene::update(int deltaTime, bool forward, bool back, bool left, bool right
 			curr_tri_dist[i][j] = tri->distPoint2Plane(p->getCurrentPosition());
 			if (prev_tri_dist[i][j]*curr_tri_dist[i][j] < 0.0f) {
 				if (!tri->isInside(p->getCurrentPosition())) continue; 
-				update_particle_plane(p, tri);
+				update_particle_plane(p, tri, update_mode);
 				curr_tri_dist[i][j] = -curr_tri_dist[i][j]; 
 			}
 		}
@@ -262,7 +269,7 @@ void Scene::update(int deltaTime, bool forward, bool back, bool left, bool right
 			if (s->isInside(p->getCurrentPosition())) {
 				glm::vec3 boundary = s->getPointOnBoundary(p->getCurrentPosition(), p->getPreviousPosition());
 				glm::vec3 normal = boundary - s->center;
-				update_particle_sphere(p, normal, boundary);
+				update_particle_sphere(p, normal, boundary, update_mode);
 			}
 		}
 
