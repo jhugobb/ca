@@ -1,0 +1,1 @@
+/usr/bin/c++  -g -Wall  -rdynamic CMakeFiles/BaseCode.dir/main.cpp.o  -o BaseCode -lGL -lGLU -lglut -lXi -lGLEW -lfreetype -lcal3d -Wl,-Bstatic -lcal3d -Wl,-Bdynamic 

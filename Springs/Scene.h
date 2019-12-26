@@ -33,6 +33,10 @@ public:
 	void cleanup();
 	void toggleParticleMode();
 	void toggleUpdateMode();
+	void toggleStretch();
+	void toggleShear();
+	void toggleBending();
+	void resetScene(bool is_rope);
 
   Camera &getCamera();
   
@@ -44,6 +48,8 @@ private:
 	bool parse(std::string);
 	bool parseVisibility(std::string);
 	void init_particle(Particle* p, float dt);
+	void update_forces(int i);
+	void update_forces_rope(int i);
 
 private:
   Camera camera;
@@ -57,9 +63,17 @@ private:
 	std::vector<std::vector<float>> prev_plane_dist; 
 	std::vector<std::vector<bool>> curr_sphere_dist;
 	std::vector<std::vector<bool>> prev_sphere_dist; 
+	std::vector<glm::vec3> initial_pos;
+	float initial_ds;
 	std::vector<glm::vec4> colors;
 	int part_mode;
 	int update_mode;
+	bool use_stretch;
+	bool use_shear;
+	bool use_bend;
+	bool is_rope;
+	double initial_d;
+	int matrix_size;
 	TriangleMesh* particle_mesh;
 	TriangleMesh* cave;
 	std::vector<TriangleMesh*> tri_meshes;

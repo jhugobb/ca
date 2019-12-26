@@ -26,6 +26,10 @@ Particle::~Particle()
 }
 
 //setters
+void Particle::setMass(const float& m) {
+	m_mass = m;
+}
+
 void Particle::setPosition(const float& x, const float& y, const float& z)
 {
 	glm::vec3 pos(x,y,z);
@@ -141,20 +145,20 @@ void Particle::updateParticle(const float& dt, UpdateMethod method)
 		{
 			m_previousPosition = m_currentPosition;
 			m_currentPosition += m_velocity*dt;
-			m_velocity += m_force*dt;
+			m_velocity += (m_force/m_mass)*dt;
 		}
 			break;
 		case UpdateMethod::EulerSemi:
 		{
 			m_previousPosition = m_currentPosition;
-			m_velocity += m_force*dt;
+			m_velocity += (m_force/m_mass) *dt;
 			m_currentPosition += m_velocity*dt;
 		}
 			break;
 		case UpdateMethod::Verlet:
 		{
 			glm::vec3 new_pos;
-			new_pos = m_currentPosition + float(0.99) * (m_currentPosition - m_previousPosition) + m_force * (dt*dt);
+			new_pos = m_currentPosition + float(0.99) * (m_currentPosition - m_previousPosition) + m_force * ((dt*dt)/m_mass);
 			m_velocity = (new_pos - m_currentPosition)/dt;
 			m_previousPosition = m_currentPosition;
 			m_currentPosition = new_pos;

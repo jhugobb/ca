@@ -20,6 +20,9 @@ public:
 	void addTriangle(int v0, int v1, int v2);
 	void buildCube(float size, float inside, glm::vec3 position);
 	void buildParticle(glm::vec3 position);
+	void buildCloth();
+	void buildRope();
+	void changeVBO(ShaderProgram &program);
 	vector<int> getTriangles();
 	vector<glm::vec3> getVertices();
 	void sendToOpenGL(ShaderProgram &program);

@@ -19,7 +19,7 @@ Camera::~Camera()
 
 void Camera::init(float initDistance, float initAngleX, float initAngleY)
 {
-  position = glm::vec3(0, -1, -10);
+  position = glm::vec3(-2, 1, -4);
   distance = initDistance;
   angleX = initAngleX;
   angleY = initAngleY;

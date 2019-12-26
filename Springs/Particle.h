@@ -24,6 +24,7 @@ public:
 	void setBouncing(float bouncing);
 	void setLifetime(float lifetime);
 	void setFixed(bool fixed);
+	void setMass(const float& m);
 
 	//getters
 	glm::vec3 getCurrentPosition();
@@ -47,6 +48,7 @@ private:
 	glm::vec3 m_velocity;
 
 	float m_bouncing;
+	float m_mass;
 	float m_lifetime;
 	bool  m_fixed;
 

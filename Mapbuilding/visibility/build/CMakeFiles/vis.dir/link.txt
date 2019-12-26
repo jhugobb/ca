@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -Wall  -rdynamic CMakeFiles/vis.dir/Map.cpp.o CMakeFiles/vis.dir/main.cpp.o  -o vis 

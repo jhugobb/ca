@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yellow/Desktop/MIRI/2/srgge/BaseCodeWithText/visibility/Map.cpp
+Map.h
+/home/yellow/Desktop/MIRI/2/srgge/BaseCodeWithText/visibility/Map.h
+
+/home/yellow/Desktop/MIRI/2/srgge/BaseCodeWithText/visibility/Map.h
+vector
+-
+set
+-
+
+/home/yellow/Desktop/MIRI/2/srgge/BaseCodeWithText/visibility/main.cpp
+iostream
+-
+Map.h
+/home/yellow/Desktop/MIRI/2/srgge/BaseCodeWithText/visibility/Map.h
+string
+-
+fstream
+-
+random
+-
+cmath
+-
+map
+-
+unordered_set
+-
+eigen3/Eigen/Dense
+-
+

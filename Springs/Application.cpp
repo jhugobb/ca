@@ -57,6 +57,18 @@ void Application::keyPressed(int key)
 		case 117:
 			scene.toggleUpdateMode();
 			break;
+		case 98:
+			scene.toggleBending();
+			break;
+		case 121:
+			scene.toggleStretch();
+			break;
+		case 105:
+			scene.toggleShear();
+			break;
+		case 114:
+			scene.resetScene(false);
+			break;
 	}
 	keys[key] = true;
 }
